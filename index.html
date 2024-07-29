@@ -38,7 +38,6 @@
       max-width: 400px;
       border: 2px solid #2c2c2c;
       color: #c0c0c0;
-      position: relative;
     }
 
     .navbar {
@@ -79,7 +78,6 @@
       border-radius: 4px;
       background-color: #121212;
       color: #c0c0c0;
-      font-size: 1rem;
     }
 
     .form-input::placeholder {
@@ -138,89 +136,6 @@
       margin-bottom: 0.5rem;
       font-size: 1rem;
     }
-
-    /* Chatbox styles */
-    .chatbox {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: 300px;
-      max-height: 400px;
-      background: #1f1f1f;
-      border: 2px solid #2c2c2c;
-      border-radius: 10px;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      z-index: 1000;
-    }
-
-    .chatbox-header {
-      background: #333;
-      padding: 10px;
-      color: #ffdd57;
-      text-align: center;
-      font-weight: bold;
-      border-bottom: 1px solid #2c2c2c;
-    }
-
-    .chatbox-messages {
-      flex: 1;
-      padding: 10px;
-      overflow-y: auto;
-      color: #c0c0c0;
-    }
-
-    .chatbox-input {
-      display: flex;
-      border-top: 1px solid #2c2c2c;
-    }
-
-    .chatbox-input input {
-      flex: 1;
-      padding: 10px;
-      border: none;
-      background: #121212;
-      color: #c0c0c0;
-    }
-
-    .chatbox-input button {
-      padding: 10px;
-      background: #ffdd57;
-      border: none;
-      color: #333;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-
-    .chatbox-input button:hover {
-      background: #e6c44d;
-    }
-
-    /* Button to open chatbox */
-    .chatbox-toggle {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #ffdd57;
-      color: #333;
-      border: none;
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      z-index: 1001;
-      font-size: 1.5rem;
-    }
-
-    .chatbox-toggle.hidden {
-      display: none;
-    }
   </style>
 </head>
 
@@ -258,17 +173,6 @@
     </div>
   </div>
 
-  <!-- Chatbox -->
-  <div class="chatbox hidden" id="chatbox">
-    <div class="chatbox-header">Chat with GPT</div>
-    <div class="chatbox-messages" id="chatbox-messages"></div>
-    <div class="chatbox-input">
-      <input type="text" id="chatbox-input" placeholder="Type a message...">
-      <button onclick="sendMessage()">Send</button>
-    </div>
-  </div>
-  <button class="chatbox-toggle" id="chatbox-toggle" onclick="toggleChatbox()">💬</button>
-
   <script>
     function showPage(page) {
       document.querySelectorAll('.navbar-link').forEach(link => link.classList.remove('active'));
@@ -291,7 +195,7 @@
       });
     }
 
-    document.getElementById('pantry-form').addEventListener('submit', function (event) {
+    document.getElementById('pantry-form').addEventListener('submit', function(event) {
       event.preventDefault();
       const itemName = event.target['item-name'].value;
       const itemQuantity = event.target['item-quantity'].value;
@@ -310,52 +214,6 @@
     document.addEventListener('DOMContentLoaded', () => {
       const items = JSON.parse(localStorage.getItem('pantryItems')) || [];
     });
-
-    // Chatbox functions
-    function toggleChatbox() {
-      const chatbox = document.getElementById('chatbox');
-      const chatboxToggle = document.getElementById('chatbox-toggle');
-      chatbox.classList.toggle('hidden');
-      chatboxToggle.classList.toggle('hidden');
-    }
-
-    function sendMessage() {
-      const input = document.getElementById('chatbox-input');
-      const message = input.value;
-      if (message.trim() === '') return;
-
-      // Display the user's message
-      const messagesContainer = document.getElementById('chatbox-messages');
-      const userMessage = document.createElement('div');
-      userMessage.textContent = message;
-      userMessage.style.textAlign = 'right';
-      messagesContainer.appendChild(userMessage);
-
-      // Clear the input field
-      input.value = '';
-
-      // Send the message to the backend (Llama 3 model)
-      fetch('https://api.your-llama-backend.com/v1/chat', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer YOUR_API_KEY'
-        },
-        body: JSON.stringify({ message })
-      })
-      .then(response => response.json())
-      .then(data => {
-        // Display the AI's response
-        const aiMessage = document.createElement('div');
-        aiMessage.textContent = data.response;
-        aiMessage.style.textAlign = 'left';
-        messagesContainer.appendChild(aiMessage);
-        messagesContainer.scrollTop = messagesContainer.scrollHeight;
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
-    }
   </script>
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
