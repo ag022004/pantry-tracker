@@ -80,6 +80,26 @@
       border-radius: 4px;
       background-color: #121212;
       color: #c0c0c0;
+      font-size: 1rem;
+    }
+
+    .form-input::placeholder {
+      color: #c0c0c0;
+    }
+
+    .form-input[type="date"] {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      color: #c0c0c0;
+      background-color: #121212;
+      border: 1px solid #2c2c2c;
+      border-radius: 4px;
+      padding: 1rem;
+    }
+
+    .form-input[type="date"]::-webkit-calendar-picker-indicator {
+      display: none;
     }
 
     .form-btn {
@@ -116,6 +136,7 @@
       padding: 1rem;
       border-radius: 4px;
       margin-bottom: 0.5rem;
+      font-size: 1rem;
     }
   </style>
 </head>
