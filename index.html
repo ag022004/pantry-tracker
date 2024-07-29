@@ -46,9 +46,13 @@
     .navbar {
       background: #333;
       padding: 1rem;
-      border-radius: 25px;
+      border-radius: 15px;
       margin-bottom: 2rem;
       width: 100%;
+      text-align: center;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #ffdd57;
     }
 
     .navbar-list {
@@ -153,11 +157,12 @@
   <div class="main-content">
     <div class="container">
       <nav class="navbar">
-        <ul class="navbar-list">
-          <li class="navbar-item"><a href="#" class="navbar-link active" id="pantry-link" onclick="showPage('pantry')">Pantry</a></li>
-          <li class="navbar-item"><a href="#" class="navbar-link" id="dashboard-link" onclick="showPage('dashboard')">Dashboard</a></li>
-        </ul>
+        Pantry Management
       </nav>
+      <ul class="navbar-list">
+        <li class="navbar-item"><a href="#" class="navbar-link active" id="pantry-link" onclick="showPage('pantry')">Pantry</a></li>
+        <li class="navbar-item"><a href="#" class="navbar-link" id="dashboard-link" onclick="showPage('dashboard')">Dashboard</a></li>
+      </ul>
 
       <div id="pantry" class="page">
         <form id="pantry-form">
