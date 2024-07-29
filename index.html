@@ -22,35 +22,27 @@
 
     main {
       display: flex;
-      width: 100%;
-      height: 100vh;
-    }
-
-    .sidebar {
-      background: #1f1f1f;
-      padding: 1rem;
-      width: 250px;
-      display: flex;
       flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .sidebar-info,
-    .sidebar-info_more {
-      margin-bottom: 2rem;
-    }
-
-    .sidebar .name {
-      color: #ffdd57;
+      width: 80%;
+      height: 80vh;
+      background-color: #1f1f1f;
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
     .navbar {
       background: #333;
       padding: 1rem;
+      border-radius: 10px;
+      margin-bottom: 2rem;
+      text-align: center;
     }
 
     .navbar-list {
       list-style: none;
+      padding: 0;
+      margin: 0;
       display: flex;
       justify-content: space-around;
     }
@@ -58,26 +50,30 @@
     .navbar-link {
       color: #c0c0c0;
       text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
     }
 
-    .navbar-link.active {
-      color: #ffdd57;
+    .navbar-link.active,
+    .navbar-link:hover {
+      background-color: #ffdd57;
+      color: #333;
     }
 
     .main-content {
       flex: 1;
-      background: #1f1f1f;
-      padding: 2rem;
       overflow-y: auto;
     }
 
     .article-title {
       color: #ffdd57;
+      margin-bottom: 1rem;
     }
 
     .form-title,
     .list-title {
       color: #c0c0c0;
+      margin-bottom: 1rem;
     }
 
     .form-input {
@@ -85,7 +81,7 @@
       padding: 1rem;
       margin: 0.5rem 0;
       border: 1px solid #2c2c2c;
-      border-radius: 4px;
+      border-radius: 10px;
       background-color: #121212;
       color: #c0c0c0;
     }
@@ -99,7 +95,7 @@
       background-color: #ffdd57;
       color: #333;
       font-weight: 600;
-      border-radius: 4px;
+      border-radius: 10px;
       cursor: pointer;
       margin-top: 1rem;
     }
@@ -111,6 +107,14 @@
     #pantry-items {
       list-style: none;
       padding: 0;
+      margin: 0;
+    }
+
+    #pantry-items li {
+      background-color: #2c2c2c;
+      padding: 1rem;
+      border-radius: 10px;
+      margin-bottom: 0.5rem;
     }
   </style>
 </head>
@@ -118,62 +122,20 @@
 <body>
 
   <main>
-    <aside class="sidebar">
-      <div class="sidebar-info">
-        <figure class="avatar-box">
-          <img src="./assets/images/my-avatar.png" alt="Pantry Manager" width="80">
-        </figure>
-        <div class="info-content">
-          <h1 class="name">Pantry Manager</h1>
-          <p class="title">Manage Your Pantry Efficiently</p>
-        </div>
-        <button class="info_more-btn">
-          <span>Show Contacts</span>
-          <ion-icon name="chevron-down"></ion-icon>
-        </button>
-      </div>
-      <div class="sidebar-info_more">
-        <div class="separator"></div>
-        <ul class="contacts-list">
-          <li class="contact-item">
-            <div class="icon-box"><ion-icon name="mail-outline"></ion-icon></div>
-            <div class="contact-info">
-              <p class="contact-title">Email</p>
-              <a href="mailto:contact@pantrymanager.com" class="contact-link">contact@pantrymanager.com</a>
-            </div>
-          </li>
-          <li class="contact-item">
-            <div class="icon-box"><ion-icon name="location-outline"></ion-icon></div>
-            <div class="contact-info">
-              <p class="contact-title">Location</p>
-              <address>Anywhere, Earth</address>
-            </div>
-          </li>
-        </ul>
-        <div class="separator"></div>
-        <ul class="social-list">
-          <li class="social-item"><a href="#" class="social-link"><ion-icon name="logo-facebook"></ion-icon></a></li>
-          <li class="social-item"><a href="#" class="social-link"><ion-icon name="logo-twitter"></ion-icon></a></li>
-          <li class="social-item"><a href="#" class="social-link"><ion-icon name="logo-instagram"></ion-icon></a></li>
-        </ul>
-      </div>
-    </aside>
+    <nav class="navbar">
+      <ul class="navbar-list">
+        <li class="navbar-item"><a href="#" class="navbar-link active" id="pantry-link" onclick="showPage('pantry')">Pantry</a></li>
+        <li class="navbar-item"><a href="#" class="navbar-link" id="dashboard-link" onclick="showPage('dashboard')">Dashboard</a></li>
+      </ul>
+    </nav>
 
     <div class="main-content">
-      <nav class="navbar">
-        <ul class="navbar-list">
-          <li class="navbar-item"><a href="#" class="navbar-link active" id="pantry-link" onclick="showPage('pantry')">Pantry</a></li>
-          <li class="navbar-item"><a href="#" class="navbar-link" id="dashboard-link" onclick="showPage('dashboard')">Dashboard</a></li>
-          <li class="navbar-item"><a href="#" class="navbar-link" id="recipes-link" onclick="showPage('recipes')">Recipes</a></li>
-        </ul>
-      </nav>
-
       <article class="pantry active" data-page="pantry">
         <header>
-          <h2 class="h2 article-title">Pantry Management</h2>
+          <h2 class="article-title">Pantry Management</h2>
         </header>
         <section class="pantry-form">
-          <h3 class="h3 form-title">Add New Item</h3>
+          <h3 class="form-title">Add New Item</h3>
           <form id="pantry-form">
             <div class="input-wrapper">
               <input type="text" name="item-name" class="form-input" placeholder="Item Name" required>
@@ -188,7 +150,7 @@
         </section>
 
         <section class="pantry-list">
-          <h3 class="h3 list-title">Pantry Items</h3>
+          <h3 class="list-title">Pantry Items</h3>
           <ul id="pantry-items">
             <!-- List of pantry items will be displayed here -->
           </ul>
@@ -197,19 +159,10 @@
 
       <article class="dashboard" data-page="dashboard">
         <header>
-          <h2 class="h2 article-title">Dashboard</h2>
+          <h2 class="article-title">Dashboard</h2>
         </header>
         <section class="dashboard-content">
           <!-- Dashboard content goes here -->
-        </section>
-      </article>
-
-      <article class="recipes" data-page="recipes">
-        <header>
-          <h2 class="h2 article-title">Recipe Suggestions</h2>
-        </header>
-        <section class="recipes-content">
-          <!-- Recipe suggestions will be displayed here -->
         </section>
       </article>
     </div>
