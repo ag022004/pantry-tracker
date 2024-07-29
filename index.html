@@ -20,15 +20,14 @@
       color: #c0c0c0;
     }
 
-    main {
-      display: flex;
-      flex-direction: column;
-      width: 80%;
-      height: 80vh;
-      background-color: #1f1f1f;
-      border-radius: 15px;
+    .container {
+      background: #1f1f1f;
       padding: 2rem;
+      border-radius: 15px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 600px;
+      text-align: center;
     }
 
     .navbar {
@@ -36,7 +35,6 @@
       padding: 1rem;
       border-radius: 10px;
       margin-bottom: 2rem;
-      text-align: center;
     }
 
     .navbar-list {
@@ -54,15 +52,10 @@
       border-radius: 5px;
     }
 
-    .navbar-link.active,
-    .navbar-link:hover {
+    .navbar-link:hover,
+    .navbar-link.active {
       background-color: #ffdd57;
       color: #333;
-    }
-
-    .main-content {
-      flex: 1;
-      overflow-y: auto;
     }
 
     .article-title {
@@ -116,12 +109,16 @@
       border-radius: 10px;
       margin-bottom: 0.5rem;
     }
+
+    .hidden {
+      display: none;
+    }
   </style>
 </head>
 
 <body>
 
-  <main>
+  <div class="container">
     <nav class="navbar">
       <ul class="navbar-list">
         <li class="navbar-item"><a href="#" class="navbar-link active" id="pantry-link" onclick="showPage('pantry')">Pantry</a></li>
@@ -129,54 +126,50 @@
       </ul>
     </nav>
 
-    <div class="main-content">
-      <article class="pantry active" data-page="pantry">
-        <header>
-          <h2 class="article-title">Pantry Management</h2>
-        </header>
-        <section class="pantry-form">
-          <h3 class="form-title">Add New Item</h3>
-          <form id="pantry-form">
-            <div class="input-wrapper">
-              <input type="text" name="item-name" class="form-input" placeholder="Item Name" required>
-              <input type="number" name="item-quantity" class="form-input" placeholder="Quantity" required>
-              <input type="date" name="item-expiration" class="form-input" required>
-            </div>
-            <button class="form-btn" type="submit">
-              <ion-icon name="add-circle"></ion-icon>
-              <span>Add Item</span>
-            </button>
-          </form>
-        </section>
+    <div id="pantry" class="page">
+      <h2 class="article-title">Pantry Management</h2>
 
-        <section class="pantry-list">
-          <h3 class="list-title">Pantry Items</h3>
-          <ul id="pantry-items">
-            <!-- List of pantry items will be displayed here -->
-          </ul>
-        </section>
-      </article>
+      <section class="pantry-form">
+        <h3 class="form-title">Add New Item</h3>
+        <form id="pantry-form">
+          <div class="input-wrapper">
+            <input type="text" name="item-name" class="form-input" placeholder="Item Name" required>
+            <input type="number" name="item-quantity" class="form-input" placeholder="Quantity" required>
+            <input type="date" name="item-expiration" class="form-input" required>
+          </div>
+          <button class="form-btn" type="submit">
+            <ion-icon name="add-circle"></ion-icon>
+            <span>Add Item</span>
+          </button>
+        </form>
+      </section>
 
-      <article class="dashboard" data-page="dashboard">
-        <header>
-          <h2 class="article-title">Dashboard</h2>
-        </header>
-        <section class="dashboard-content">
-          <!-- Dashboard content goes here -->
-        </section>
-      </article>
+      <section class="pantry-list">
+        <h3 class="list-title">Pantry Items</h3>
+        <ul id="pantry-items">
+          <!-- List of pantry items will be displayed here -->
+        </ul>
+      </section>
     </div>
-  </main>
+
+    <div id="dashboard" class="page hidden">
+      <h2 class="article-title">Dashboard</h2>
+      <section class="dashboard-content">
+        <h3 class="content-title">Statistics</h3>
+        <!-- Dashboard content goes here -->
+      </section>
+    </div>
+  </div>
 
   <script>
     function showPage(page) {
       document.querySelectorAll('.navbar-link').forEach(link => link.classList.remove('active'));
-      document.querySelectorAll('article').forEach(article => article.classList.remove('active'));
+      document.querySelectorAll('.page').forEach(page => page.classList.add('hidden'));
       document.getElementById(`${page}-link`).classList.add('active');
-      document.querySelector(`.${page}`).classList.add('active');
+      document.getElementById(page).classList.remove('hidden');
     }
 
-    document.getElementById('pantry-form').addEventListener('submit', function(event) {
+    document.getElementById('pantry-form').addEventListener('submit', function (event) {
       event.preventDefault();
       const itemName = event.target['item-name'].value;
       const itemQuantity = event.target['item-quantity'].value;
