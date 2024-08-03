@@ -46,12 +46,12 @@
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       width: 90%;
       max-width: 400px;
+      height: 250px; /* Fixed height to match both sections */
       border: 2px solid #2c2c2c;
       color: #c0c0c0;
       display: flex;
       flex-direction: column;
       align-items: center;
-      min-height: 300px; /* Ensuring minimum height to match the container size */
     }
 
     .navbar {
@@ -144,15 +144,12 @@
     }
 
     .page {
-      width: calc(100% - 2rem);
-      padding: 1rem;
-      border-radius: 15px;
-      background: #1f1f1f;
+      width: 100%;
+      height: 100%; /* Fixed height to match the container size */
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
-      min-height: 300px; /* Ensuring minimum height to match the container size */
     }
 
     #dashboard-items {
